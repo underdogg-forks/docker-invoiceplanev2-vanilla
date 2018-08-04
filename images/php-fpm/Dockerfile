@@ -26,7 +26,9 @@ RUN set -xe; \
         mbstring \
         pdo \
         pdo_mysql \
+        mysqli \
         intl \
+    && docker-php-ext-enable mysqli \
     # cleanup
     && pecl clear-cache \
     && rm -rf \

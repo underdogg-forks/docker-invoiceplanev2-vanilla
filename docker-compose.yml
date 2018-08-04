@@ -45,6 +45,8 @@ services:
                     - "sso.vanilla.localhost"
                     - "dev.vanilla.localhost"
                     - "vanilla.test"
+                    - "wordpress.vanilla.localhost"
+                    - "xssi.vanilla.localhost"
         ports:
             - "80:80"
             - "8080:8080"

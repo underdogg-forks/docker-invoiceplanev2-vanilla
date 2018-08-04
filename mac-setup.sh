@@ -8,6 +8,8 @@ HOSTNAMES=(
     memcached
     sso.vanilla.localhost
     vanilla.test
+    wordpress.vanilla.localhost
+    xssi.vanilla.localhost
 );
 
 if [[ $UID != 0 ]]; then
