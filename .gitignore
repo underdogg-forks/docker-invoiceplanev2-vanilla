@@ -45,3 +45,4 @@ _notes
 !/logs/php-fpm/.gitkeep
 /logs/sphinx/
 !/logs/sphinx/.gitkeep
+/*.env

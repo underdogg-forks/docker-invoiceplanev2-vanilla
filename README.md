@@ -23,18 +23,18 @@ To change that set the environment variable VANILLA_DOCKER_DATABASE to mariadb i
 Apache 2 web server.
 
 - Accessible with the port 9080 and 9443
-- Serve https://dev.vanilla.localhost:9443
+- Serve https://dev.example.localhost:9443
 
 ### nginx
 
 nginx web server
 
 - Serve:
-    - https://dev.vanilla.localhost (main forum)
-    - https://sso.vanilla.localhost ([stub-sso-providers](https://github.com/vanilla/stub-sso-providers))
-    - https://embed.vanilla.localhost ([stub-embed-providers](https://github.com/vanilla/stub-embed-providers))
-    - https://advanced-embed.vanilla.localhost ([stub-embed-providers](https://github.com/vanilla/stub-embed-providers))
-    - http://vanilla.test:8080 (unit tests address)
+    - https://dev.example.localhost (main forum)
+    - https://sso.example.localhost ([stub-sso-providers](https://github.com/example/stub-sso-providers))
+    - https://embed.example.localhost ([stub-embed-providers](https://github.com/example/stub-embed-providers))
+    - https://advanced-embed.example.localhost ([stub-embed-providers](https://github.com/example/stub-embed-providers))
+    - http://example.test:8080 (unit tests address)
 
 ### php-fpm
 
@@ -42,28 +42,28 @@ php-fpm with PHP 7.2
 
 ## Setup
 
-*For this setup to work properly you need to clone all vanilla repositories in the same base directory*
+*For this setup to work properly you need to clone all example repositories in the same base directory*
 
 1. Get [Docker for OSX](https://download.docker.com/mac/stable/Docker.dmg) and install it.
     - Do not forget to tune up the allocated Memory and CPUs. `Docker` > `Preferences` > `Advanced`
 1. Get [Composer](https://getcomposer.org/) and install it.
-1. Create a directory for your project. In this example, we'll use `my-vanilla-project`, but you can use any name.
+1. Create a directory for your project. In this example, we'll use `my-example-project`, but you can use any name.
 1. Move into your project directory.
-1. Clone or download [vanilla/vanilla-docker](https://github.com/vanilla/vanilla-docker) into your project directory.
-1. Clone or download [vanilla/vanilla](https://github.com/vanilla/vanilla) into your project directory.
-1. Clone or download any other project dependencies into your project directory (for example, any of [vanilla/addons](https://github.com/vanilla/addons)), and install according to their instructions. _Note: All addons, plugins, themes, etc, must be located in the project directory. Everything outside of the project directory will not be made available inside of the Docker container._
+1. Clone or download [example/example-docker](https://github.com/example/example-docker) into your project directory.
+1. Clone or download [example/example](https://github.com/example/example) into your project directory.
+1. Clone or download any other project dependencies into your project directory (for example, any of [example/addons](https://github.com/example/addons)), and install according to their instructions. _Note: All addons, plugins, themes, etc, must be located in the project directory. Everything outside of the project directory will not be made available inside of the Docker container._
 1. You should have the following structure
     ```
-    my-vanilla-project
-    ├── vanilla
-    ├── vanilla-docker
+    my-example-project
+    ├── example
+    ├── example-docker
     ├── ...
     ```
-1. Move into the `vanilla` directory.
-1. Run `composer install` which will install Vanilla's dependencies.
-1. Move up and over into the `vanilla-docker` directory.
+1. Move into the `example` directory.
+1. Run `composer install` which will install Example's dependencies.
+1. Move up and over into the `example-docker` directory.
 1. Run `sudo ./mac-setup.sh` which will:
-    - Add a self signed certificate `*.vanilla.localhost` to your keychain.
+    - Add a self signed certificate `*.example.localhost` to your keychain.
     - Safely update your `/etc/hosts`.
     - Add `192.0.2.1` as a loopback IP address.
     - Create a docker volume named "datastorage" which will contain the database data.
@@ -79,9 +79,9 @@ php-fpm with PHP 7.2
     …
     php-fpm     | done.
     ```
-    and voila -> [dev.vanilla.localhost](https://dev.vanilla.localhost/) shows the Vanilla installer.
+    and voila -> [dev.example.localhost](https://dev.example.localhost/) shows the Vanilla installer.
 1. Run the installer!
-    - It is recommended to use `vanilla_dev` as the database name since some services are configured to use that database.
+    - It is recommended to use `example_dev` as the database name since some services are configured to use that database.
 
 To properly stop the containers you need to run `docker-compose down`.
 
@@ -145,5 +145,5 @@ See [Make unit tests work within PhpStorm](./docs/unit-tests.md).
 Q. Why is everything so slow?
 
 A. You are probably running on the APFS file system that became the standard with macOS High Sierra and which has pretty bad performance with Docker for Mac.
-Having the database on your host instead of inside docker might help a lot. See [#10](https://github.com/vanilla/vanilla-docker/issues/10).
+Having the database on your host instead of inside docker might help a lot. See [#10](https://github.com/example/example-docker/issues/10).
 

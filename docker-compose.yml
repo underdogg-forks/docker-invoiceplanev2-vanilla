@@ -8,7 +8,7 @@ services:
         depends_on:
             - "php-fpm"
         networks:
-            - "vanilla_network"
+            - "example_network"
         ports:
             - "9080:9080"
             - "9443:9443"
@@ -17,7 +17,7 @@ services:
             - "./logs/httpd:/var/log/httpd:delegated"
             - "./resources/certificates:/certificates:cached"
             - "./resources/usr/local/apache2/conf.d:/usr/local/apache2/conf.d:cached"
-            - "../:/srv/vanilla-repositories:cached"
+            - "../:/srv/example-repositories:cached"
 
     nginx:
         build:
@@ -29,22 +29,23 @@ services:
             - "php-fpm"
         environment:
             - "DOLLAR=$$"
-            - "FASTCGI_SPLIT_PATH_INFO=${VANILLA_DOCKER_FASTCGI_SPLIT_PATH_INFO}"
-            - "FASTCGI_INTERCEPT_ERRORS=${VANILLA_DOCKER_FASTCGI_INTERCEPT_ERRORS}"
-            - "FASTCGI_IGNORE_CLIENT_ABORT=${VANILLA_DOCKER_FASTCGI_IGNORE_CLIENT_ABORT}"
-            - "FASTCGI_CONNECT_TIMEOUT=${VANILLA_DOCKER_FASTCGI_CONNECT_TIMEOUT}"
-            - "FASTCGI_SEND_TIMEOUT=${VANILLA_DOCKER_FASTCGI_SEND_TIMEOUT}"
-            - "FASTCGI_READ_TIMEOUT=${VANILLA_DOCKER_FASTCGI_READ_TIMEOUT}"
-            - "FASTCGI_BUFFER_SIZE=${VANILLA_DOCKER_FASTCGI_BUFFER_SIZE}"
-            - "FASTCGI_BUFFERS=${VANILLA_DOCKER_FASTCGI_BUFFERS}"
-            - "FASTCGI_BUSY_BUFFERS_SIZE=${VANILLA_DOCKER_FASTCGI_BUSY_BUFFERS_SIZE}"
-            - "FASTCGI_TEMP_FILE_WRITE_SIZE=${VANILLA_DOCKER_FASTCGI_TEMP_FILE_WRITE_SIZE}"
+            - "FASTCGI_SPLIT_PATH_INFO=${EXAMPLE_DOCKER_FASTCGI_SPLIT_PATH_INFO}"
+            - "FASTCGI_INTERCEPT_ERRORS=${EXAMPLE_DOCKER_FASTCGI_INTERCEPT_ERRORS}"
+            - "FASTCGI_IGNORE_CLIENT_ABORT=${EXAMPLE_DOCKER_FASTCGI_IGNORE_CLIENT_ABORT}"
+            - "FASTCGI_CONNECT_TIMEOUT=${EXAMPLE_DOCKER_FASTCGI_CONNECT_TIMEOUT}"
+            - "FASTCGI_SEND_TIMEOUT=${EXAMPLE_DOCKER_FASTCGI_SEND_TIMEOUT}"
+            - "FASTCGI_READ_TIMEOUT=${EXAMPLE_DOCKER_FASTCGI_READ_TIMEOUT}"
+            - "FASTCGI_BUFFER_SIZE=${EXAMPLE_DOCKER_FASTCGI_BUFFER_SIZE}"
+            - "FASTCGI_BUFFERS=${EXAMPLE_DOCKER_FASTCGI_BUFFERS}"
+            - "FASTCGI_BUSY_BUFFERS_SIZE=${EXAMPLE_DOCKER_FASTCGI_BUSY_BUFFERS_SIZE}"
+            - "FASTCGI_TEMP_FILE_WRITE_SIZE=${EXAMPLE_DOCKER_FASTCGI_TEMP_FILE_WRITE_SIZE}"
         networks:
-            vanilla_network:
-                aliases: # Allows (sso|dev).vanilla.localhost to be resolved internally from php-fpm
-                    - "sso.vanilla.localhost"
-                    - "dev.vanilla.localhost"
-                    - "vanilla.test"
+            example_network:
+                aliases: # Allows (sso|dev).example.localhost to be resolved internally from php-fpm
+                    - "api.example.localhost"
+                    - "dev.example.localhost"
+                    - "example.dev"
+                    - "example.test"
         ports:
             - "80:80"
             - "8080:8080"
@@ -56,7 +57,7 @@ services:
             - "./resources/etc/nginx/conf.d:/etc/nginx/conf.d:cached"
             - "./resources/etc/nginx/sites-available:/etc/nginx/sites-available:cached"
             - "./resources/etc/nginx/sites-enabled:/etc/nginx/sites-enabled:cached"
-            - "../:/srv/vanilla-repositories:cached"
+            - "../:/srv/example-repositories:cached"
 
     # Don't forget to update docker-compose.unit-test.yml
     php-fpm:
@@ -71,19 +72,19 @@ services:
             - "TEST_DB_USER"
             - "TEST_DB_PASSWORD"
         networks:
-            - "vanilla_network"
+            - "example_network"
         volumes:
             - "shared:/shared" # expose php-fpm socket
             - "./logs/php-fpm:/var/log/php-fpm:delegated"
             - "./resources/certificates:/usr/local/share/ca-certificates:cached" # Mount extra certificates
             - "./resources/sphinx:/sphinx:cached" # expose sphinx API. We have to do this here because we need to be enable to update the plugin before we can start the container.
             - "./resources/usr/local/etc/php/conf.d:/usr/local/etc/php/custom.conf.d:cached"
-            - "../:/srv/vanilla-repositories:delegated"
+            - "../:/srv/example-repositories:delegated"
 
 volumes:
     shared:
 
 networks:
-    vanilla_network:
+    example_network:
         driver: "bridge"
-        name: "vanilla_network"
+        name: "example_network"

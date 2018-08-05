@@ -37,7 +37,7 @@ RUN set -xe; \
 COPY ./usr/local/etc/php-fpm.conf /usr/local/etc/php-fpm.conf
 COPY ./usr/local/etc/php/conf.d/00-php.ini /usr/local/etc/php/conf.d/00-php.ini
 COPY ./usr/local/etc/php/conf.d/10-xdebug.ini /usr/local/etc/php/conf.d/10-xdebug.ini
-COPY ./usr/local/etc/php/conf.d/vanilla-docker-sendmail.ini /usr/local/etc/php/conf.d/vanilla-docker-sendmail.ini
+COPY ./usr/local/etc/php/conf.d/example-docker-sendmail.ini /usr/local/etc/php/conf.d/example-docker-sendmail.ini
 
 RUN mkdir -p /shared/var/run/
 
