@@ -27,5 +27,5 @@ services:
         build:
             context: "./images/memcached"
         networks:
-            - "vanilla_network"
+            - "example_network"
         container_name: memcached

@@ -14,7 +14,7 @@ services:
             context: "./images/sphinx"
         container_name: sphinx
         networks:
-            - "vanilla_network"
+            - "example_network"
         volumes:
             - "./logs/sphinx:/var/log/sphinx:delegated"
             - "./resources/usr/local/etc/sphinx/conf.d:/usr/local/etc/sphinx/conf.d:cached"
